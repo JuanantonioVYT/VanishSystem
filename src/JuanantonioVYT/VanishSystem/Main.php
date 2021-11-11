@@ -17,6 +17,7 @@ use pocketmine\utils\TextFormat as TF;
 class Main extends PluginBase {
 
   public $prefix = TF::GREEN . "[VanishSystem] ";
+  public $about = TF::GREEN . "[AboutPlugin] ";
   public $error = TF::RED . "[Error] ";
   
   public function onEnable() {
@@ -36,10 +37,11 @@ class Main extends PluginBase {
         if($sender->isOp()) {
           foreach($this->getServer()->getOnlinePlayers() as $online){
             $online->hidePlayer($player);
-            $sender->sendMessage($this->prefix . $this->getConfig()->get("msg-vanish"));
           }
+
+          $sender->sendMessage($this->prefix . $this->getConfig()->get("msg-vanish"));
         } else {
-          $sender->sendMessage($this->NoPerms);
+          $sender->sendMessage(TF::RED . $this->error . "You not have permissions to use command");
         }
       }
         
@@ -47,24 +49,19 @@ class Main extends PluginBase {
         if($sender->isOp()) {
           foreach($this->getServer()->getOnlinePlayers() as $online){
             $online->showPlayer($player);
-            $sender->sendMessage($this->prefix . $this->getConfig()->get("msg-unvanish"));
           }
+
+          $sender->sendMessage($this->prefix . $this->getConfig()->get("msg-unvanish"));
         } else {
           $sender->sendMessage(TF::RED . $this->error . "You not have permissions to use command");
         }
       }
        
       if($label === "vanishabout") {
-        if($sender->isOp()) {
-          foreach($this->getServer()->getOnlinePlayers() as $online){
-            $sender->sendMessage(TF::RED . "[AboutPlugin]" . TF::YELLOW . "Plugin made by JuanantonioVYT Version 1.0");
-          }
-        } else {
-          $sender->sendMessage(TF::RED . $this->prefix . "You not have permissions to use command");
-        }
+        $sender->sendMessage(TF::RED . $this->about . TF::YELLOW . "Plugin made by JuanantonioVYT Version 1.0");
       }
     } else {
-      $sender->sendMessage($this->error . TF::RED." Only players can use this command.");
+      $sender->sendMessage($this->error . TF::RED. "Only players can use this command.");
       return true;
     }
     return false;

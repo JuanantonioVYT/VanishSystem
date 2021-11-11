@@ -6,10 +6,8 @@ version: 1.0
 
 commands:
   vanish:
-    description: "You are Vanished"
-    
+    description: "Disappear"
   unvanish:
-    description: "You are unvanished"
-  
+    description: "Appear"
   vanishabout:
     description: "About This Plugin"
